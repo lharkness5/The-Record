@@ -6,6 +6,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { colors, typography, spacing } from '../theme';
 import {
   HomeScreen,
+  FederalScreen,
   IowaScreen,
   ChangeDetailScreen,
   FoundationScreen,
@@ -14,23 +15,30 @@ import {
   HowItWorksScreen,
   SettingsScreen,
 } from '../screens';
-import type { HomeStackParamList, IowaStackParamList, FoundationStackParamList } from './types';
+import { HomeIcon, USFlagIcon, IowaFlagIcon } from '../components';
+import type { HomeStackParamList, FederalStackParamList, IowaStackParamList, FoundationStackParamList } from './types';
 
 const HomeStackNav = createNativeStackNavigator<HomeStackParamList>();
+const FederalStackNav = createNativeStackNavigator<FederalStackParamList>();
 const IowaStackNav = createNativeStackNavigator<IowaStackParamList>();
 const FoundationStackNav = createNativeStackNavigator<FoundationStackParamList>();
 const SettingsStackNav = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 interface TabIconProps {
-  icon: string;
+  icon?: string;
+  iconComponent?: React.ReactNode;
   label: string;
   focused: boolean;
 }
 
-const TabIcon: React.FC<TabIconProps> = ({ icon, label, focused }) => (
+const TabIcon: React.FC<TabIconProps> = ({ icon, iconComponent, label, focused }) => (
   <View style={styles.tabIconContainer}>
-    <Text style={[styles.tabIcon, focused && styles.tabIconFocused]}>{icon}</Text>
+    {iconComponent ? (
+      <View style={styles.iconWrapper}>{iconComponent}</View>
+    ) : (
+      <Text style={[styles.tabIcon, focused && styles.tabIconFocused]}>{icon}</Text>
+    )}
     <Text style={[styles.tabLabel, focused && styles.tabLabelFocused]}>{label}</Text>
   </View>
 );
@@ -62,6 +70,35 @@ const HomeStack = () => (
       }}
     />
   </HomeStackNav.Navigator>
+);
+
+const FederalStack = () => (
+  <FederalStackNav.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: colors.neutral.offWhite,
+      },
+      headerTintColor: colors.primary.navy,
+      headerTitleStyle: {
+        fontWeight: '600',
+      },
+      headerShadowVisible: false,
+    }}
+  >
+    <FederalStackNav.Screen
+      name="FederalMain"
+      component={FederalScreen}
+      options={{ headerShown: false }}
+    />
+    <FederalStackNav.Screen
+      name="ChangeDetail"
+      component={ChangeDetailScreen}
+      options={{
+        title: 'Details',
+        headerBackTitle: 'Back',
+      }}
+    />
+  </FederalStackNav.Navigator>
 );
 
 const IowaStack = () => (
@@ -187,7 +224,24 @@ const TabNavigator = () => (
       component={HomeStack}
       options={{
         tabBarIcon: ({ focused }) => (
-          <TabIcon icon="🏠" label="Home" focused={focused} />
+          <TabIcon
+            iconComponent={<HomeIcon size={24} focused={focused} />}
+            label="Home"
+            focused={focused}
+          />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Federal"
+      component={FederalStack}
+      options={{
+        tabBarIcon: ({ focused }) => (
+          <TabIcon
+            iconComponent={<USFlagIcon size={28} focused={focused} />}
+            label="Federal"
+            focused={focused}
+          />
         ),
       }}
     />
@@ -196,7 +250,11 @@ const TabNavigator = () => (
       component={IowaStack}
       options={{
         tabBarIcon: ({ focused }) => (
-          <TabIcon icon="🌽" label="Iowa" focused={focused} />
+          <TabIcon
+            iconComponent={<IowaFlagIcon size={28} focused={focused} />}
+            label="Iowa"
+            focused={focused}
+          />
         ),
       }}
     />
@@ -233,6 +291,9 @@ const styles = StyleSheet.create({
   tabIconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  iconWrapper: {
+    marginBottom: 2,
   },
   tabIcon: {
     fontSize: 22,
