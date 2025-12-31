@@ -14,8 +14,12 @@ import {
   HowItWorksScreen,
   SettingsScreen,
 } from '../screens';
+import type { HomeStackParamList, IowaStackParamList, FoundationStackParamList } from './types';
 
-const Stack = createNativeStackNavigator();
+const HomeStackNav = createNativeStackNavigator<HomeStackParamList>();
+const IowaStackNav = createNativeStackNavigator<IowaStackParamList>();
+const FoundationStackNav = createNativeStackNavigator<FoundationStackParamList>();
+const SettingsStackNav = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 interface TabIconProps {
@@ -32,7 +36,7 @@ const TabIcon: React.FC<TabIconProps> = ({ icon, label, focused }) => (
 );
 
 const HomeStack = () => (
-  <Stack.Navigator
+  <HomeStackNav.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: colors.neutral.offWhite,
@@ -44,12 +48,12 @@ const HomeStack = () => (
       headerShadowVisible: false,
     }}
   >
-    <Stack.Screen
+    <HomeStackNav.Screen
       name="HomeMain"
       component={HomeScreen}
       options={{ headerShown: false }}
     />
-    <Stack.Screen
+    <HomeStackNav.Screen
       name="ChangeDetail"
       component={ChangeDetailScreen}
       options={{
@@ -57,11 +61,11 @@ const HomeStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-  </Stack.Navigator>
+  </HomeStackNav.Navigator>
 );
 
 const IowaStack = () => (
-  <Stack.Navigator
+  <IowaStackNav.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: colors.neutral.offWhite,
@@ -73,12 +77,12 @@ const IowaStack = () => (
       headerShadowVisible: false,
     }}
   >
-    <Stack.Screen
+    <IowaStackNav.Screen
       name="IowaMain"
       component={IowaScreen}
       options={{ headerShown: false }}
     />
-    <Stack.Screen
+    <IowaStackNav.Screen
       name="ChangeDetail"
       component={ChangeDetailScreen}
       options={{
@@ -86,11 +90,11 @@ const IowaStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-  </Stack.Navigator>
+  </IowaStackNav.Navigator>
 );
 
 const FoundationStack = () => (
-  <Stack.Navigator
+  <FoundationStackNav.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: colors.neutral.offWhite,
@@ -102,12 +106,12 @@ const FoundationStack = () => (
       headerShadowVisible: false,
     }}
   >
-    <Stack.Screen
+    <FoundationStackNav.Screen
       name="FoundationMain"
       component={FoundationScreen}
       options={{ headerShown: false }}
     />
-    <Stack.Screen
+    <FoundationStackNav.Screen
       name="Constitution"
       component={ConstitutionScreen}
       options={{
@@ -115,7 +119,7 @@ const FoundationStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-    <Stack.Screen
+    <FoundationStackNav.Screen
       name="Glossary"
       component={GlossaryScreen}
       options={{
@@ -123,7 +127,7 @@ const FoundationStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-    <Stack.Screen
+    <FoundationStackNav.Screen
       name="HowItWorks"
       component={HowItWorksScreen}
       options={{
@@ -131,7 +135,7 @@ const FoundationStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-    <Stack.Screen
+    <FoundationStackNav.Screen
       name="DocumentDetail"
       component={ConstitutionScreen}
       options={{
@@ -139,11 +143,11 @@ const FoundationStack = () => (
         headerBackTitle: 'Back',
       }}
     />
-  </Stack.Navigator>
+  </FoundationStackNav.Navigator>
 );
 
 const SettingsStack = () => (
-  <Stack.Navigator
+  <SettingsStackNav.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: colors.neutral.offWhite,
@@ -155,12 +159,12 @@ const SettingsStack = () => (
       headerShadowVisible: false,
     }}
   >
-    <Stack.Screen
+    <SettingsStackNav.Screen
       name="SettingsMain"
       component={SettingsScreen}
       options={{ headerShown: false }}
     />
-  </Stack.Navigator>
+  </SettingsStackNav.Navigator>
 );
 
 const TabNavigator = () => (

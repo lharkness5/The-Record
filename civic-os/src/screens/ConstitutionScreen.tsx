@@ -220,11 +220,9 @@ const styles = StyleSheet.create({
   },
   sectionContent: {
     padding: spacing.lg,
-    paddingTop: 0,
     borderTopWidth: 1,
     borderTopColor: colors.neutral.lightGray,
     marginTop: spacing.md,
-    paddingTop: spacing.lg,
   },
   originalTextContainer: {
     backgroundColor: colors.neutral.offWhite,

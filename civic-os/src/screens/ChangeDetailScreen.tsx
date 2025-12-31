@@ -12,18 +12,12 @@ import { colors, spacing, typography, borderRadius, shadows } from '../theme';
 import { StatusBadge, TopicTag, PaywallModal } from '../components';
 import { mockChanges } from '../data/mockData';
 import { useStore } from '../store/useStore';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RouteProp } from '@react-navigation/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { HomeStackParamList } from '../navigation/types';
 
-interface ChangeDetailScreenProps {
-  navigation: NativeStackNavigationProp<any>;
-  route: RouteProp<{ params: { id: string } }, 'params'>;
-}
+type Props = NativeStackScreenProps<HomeStackParamList, 'ChangeDetail'>;
 
-export const ChangeDetailScreen: React.FC<ChangeDetailScreenProps> = ({
-  navigation,
-  route,
-}) => {
+export const ChangeDetailScreen: React.FC<Props> = ({ route }) => {
   const { id } = route.params;
   const [showPaywall, setShowPaywall] = useState(false);
   const subscriptionTier = useStore((state) => state.subscriptionTier);

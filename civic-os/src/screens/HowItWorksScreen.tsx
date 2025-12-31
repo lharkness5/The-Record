@@ -9,13 +9,12 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing, typography, borderRadius, shadows } from '../theme';
 import { governmentBranches } from '../data/mockData';
-import type { RouteProp } from '@react-navigation/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { FoundationStackParamList } from '../navigation/types';
 
-interface HowItWorksScreenProps {
-  route: RouteProp<{ params: { level?: 'federal' | 'iowa' } }, 'params'>;
-}
+type Props = NativeStackScreenProps<FoundationStackParamList, 'HowItWorks'>;
 
-export const HowItWorksScreen: React.FC<HowItWorksScreenProps> = ({ route }) => {
+export const HowItWorksScreen: React.FC<Props> = ({ route }) => {
   const initialLevel = route.params?.level || 'federal';
   const [selectedLevel, setSelectedLevel] = useState<'federal' | 'iowa'>(initialLevel);
   const [expandedBranch, setExpandedBranch] = useState<string | null>(null);
