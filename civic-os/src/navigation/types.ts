@@ -2,6 +2,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   HomeMain: undefined;
+  FederalMain: undefined;
   IowaMain: undefined;
   FoundationMain: undefined;
   SettingsMain: undefined;
@@ -14,6 +15,11 @@ export type RootStackParamList = {
 
 export type HomeStackParamList = {
   HomeMain: undefined;
+  ChangeDetail: { id: string };
+};
+
+export type FederalStackParamList = {
+  FederalMain: undefined;
   ChangeDetail: { id: string };
 };
 
